@@ -1,0 +1,49 @@
+{
+  "name": "aideal-android-sdk",
+  "private": true,
+  "scripts": {
+    "semantic-release": "semantic-release"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "11.0.0",
+    "@commitlint/config-conventional": "11.0.0",
+    "@semantic-release/changelog": "5.0.1",
+    "@semantic-release/commit-analyzer": "8.0.1",
+    "@semantic-release/exec": "5.0.0",
+    "@semantic-release/git": "9.0.0",
+    "@semantic-release/release-notes-generator": "9.0.1",
+    "husky": "4.3.0",
+    "semantic-release": "17.2.3"
+  },
+  "engines": {
+    "node": ">=14.15.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "sed -i \"s/version\\s=\\s[0-9]\\+\\.[0-9]\\+\\.[0-9]\\+/version = ${nextRelease.version}/g\" gradle.properties",
+          "publishCmd": "./gradlew clean build bintrayUpload -x test"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md",
+            "gradle.properties"
+          ]
+        }
+      ]
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+# This is a sample build configuration for Java (Gradle).
+# Check our guides at https://confluence.atlassian.com/x/zd-5Mw for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment.
+
+pipelines:
+  default:
+    - step:
+        image: cimg/openjdk:8.0-node
+        caches:
+          - node
+          - gradle
+          - android-sdk
+        script:
+          # Configure secrets
+          - echo -e "bintray.user=yuji-isobe\nbintray.apikey=${BINTRAY_APIKEY}" >> local.properties
+
+          # Download and unzip android sdk
+          - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-3859397.zip
+          - unzip -o -qq android-sdk.zip -d android-sdk
+
+          # Define Android Home and add PATHs
+          - export ANDROID_HOME="/opt/atlassian/pipelines/agent/build/android-sdk"
+          - export PATH="$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
+
+          # Download packages.
+          - yes | sdkmanager --licenses
+
+          # Release
+          - npm install
+          - npm run semantic-release
+
+          # Test
+          - ./gradlew lint
+          - ./gradlew test
+
+definitions:
+  caches:
+    android-sdk: android-sdk

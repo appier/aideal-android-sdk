@@ -1,2 +1,3 @@
-# aideal-android-sdk
-AiDeal Android SDK for Enterprise
+# README #
+
+Android client SDK for AiDeal

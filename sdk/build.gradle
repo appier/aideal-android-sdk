@@ -1,0 +1,101 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName version
+
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField 'String', 'AID_SOCKET_HOST', '"http://10.10.71.157/"'
+            buildConfigField 'String', 'AID_HTTP_HOST', '"https://visitor.zenclerk-dev.com/api/v1/"'
+        }
+        release {
+            buildConfigField 'String', 'AID_SOCKET_HOST', '"https://visitor-fleet.zenclerk.com/"'
+            buildConfigField 'String', 'AID_HTTP_HOST', '"https://f1.zenclerk.com/api/v1/"'
+        }
+    }
+
+    lintOptions {
+        warningsAsErrors true
+        abortOnError true
+        disable 'IconLocation'
+        ignore 'NewerVersionAvailable', 'GradleDependency'
+    }
+}
+
+dependencies {
+    // Default Dependencies
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutine_version"
+
+    // Support Dependencies
+    implementation "com.android.support:appcompat-v7:$android_support_version"
+    implementation "com.android.support:recyclerview-v7:$android_support_version"
+
+    // SDK Dependencies
+    implementation "com.android.volley:volley:$volley_version"
+    implementation ("io.socket:socket.io-client:$socket_io_client_version") {
+        // excluding org.json which is provided by Android
+        exclude group: 'org.json', module: 'json'
+    }
+
+    // Test Dependencies
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "org.robolectric:robolectric:$robolectric_version"
+    testImplementation "com.google.truth:truth:$truth_version"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
+
+    // Android Test Dependencies
+    androidTestImplementation "com.android.support.test:runner:$test_runner_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = rootProject.ext.libraryGroupId
+                artifactId = rootProject.ext.libraryArtifactId
+                version = version
+            }
+        }
+    }
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty('bintray.user')
+    key = properties.getProperty('bintray.apikey')
+    publications = ['release']
+    publish = true
+    override = true
+    pkg {
+        repo = rootProject.ext.libraryRepository
+        userOrg = rootProject.ext.libraryOrganization
+        name = rootProject.ext.libraryArtifactId
+        desc = rootProject.ext.libraryDescription
+        version {
+            name = version
+            released = new Date()
+        }
+    }
+}

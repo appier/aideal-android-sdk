@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">AiDeal</string>
+    <string name="cart_icon">cart icon</string>
+    <string name="receive_campaign">ReceiveCampaign</string>
+    <string name="cart_link">cart link</string>
+    <string name="thank_you_for_your_purchase">Thank You for Your Purchase</string>
+    <string name="proceed_to_buy">ProceedToBuy</string>
+    <string name="payment_method_credit_card">Payment Method: Credit Card</string>
+    <string name="delivery_address_appier_6f">Delivery Address: Appier 6F</string>
+    <string name="total_price">Total Price:</string>
+    <string name="checkout">Checkout</string>
+    <string name="text_view">TextView</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="direct_buy">Direct Buy</string>
+    <string name="top_page">TOP PAGE</string>
+    <string name="category">Category</string>
+    <string name="mypage">MyPage</string>
+    <string name="clear_state">ClearState</string>
+    <string name="reduce_count_down_time">ReduceCountDownTime</string>
+    <string name="reset_count_down_time">ResetCountDownTime</string>
+    <string name="reduce_session_time">ReduceSessionTime</string>
+    <string name="cart_form_page">Cart Form Page</string>
+    <string name="back">Back</string>
+    <string name="account">Account</string>
+    <string name="password">Password</string>
+    <string name="enable_data_collection">EnableDataCollection</string>
+    <string name="disable_data_collection">DisableDataCollection</string>
+</resources>

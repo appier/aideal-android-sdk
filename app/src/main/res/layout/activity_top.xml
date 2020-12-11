@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#abb6ff"
+    tools:context=".ui.top.TopActivity"
+    tools:ignore="Overdraw">
+
+    <Button
+        android:id="@+id/btn_cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cart_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/top_page"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#7986cc"
+        android:paddingHorizontal="20dp"
+        android:text="@string/category"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_mypage"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_mypage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#7986cc"
+        android:paddingHorizontal="20dp"
+        android:text="@string/mypage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_category"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/clearState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#7986cc"
+        android:paddingHorizontal="20dp"
+        android:text="@string/clear_state"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/disableDataCollection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#7986cc"
+        android:paddingHorizontal="20dp"
+        android:text="@string/disable_data_collection"
+        app:layout_constraintBottom_toTopOf="@+id/reduceCD"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/enableDataCollection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#7986cc"
+        android:paddingHorizontal="20dp"
+        android:text="@string/enable_data_collection"
+        app:layout_constraintBottom_toTopOf="@+id/disableDataCollection"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/reduceCD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#7986cc"
+        android:paddingHorizontal="20dp"
+        android:text="@string/reduce_count_down_time"
+        app:layout_constraintBottom_toTopOf="@+id/resetCD"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/resetCD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#7986cc"
+        android:paddingHorizontal="20dp"
+        android:text="@string/reset_count_down_time"
+        app:layout_constraintBottom_toTopOf="@+id/reduceSessionTime"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/reduceSessionTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#7986cc"
+        android:paddingHorizontal="20dp"
+        android:text="@string/reduce_session_time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</android.support.constraint.ConstraintLayout>
